@@ -1,8 +1,7 @@
 package helper.update.widget.com.widgetupdatehelper;
 
+import android.support.compat.BuildConfig;
 import android.util.Log;
-
-import yotaphone.yotadevices.com.widgetupdatehelper.BuildConfig;
 
 public class LogWrapper {
     public static void d(final String tag, String message) {

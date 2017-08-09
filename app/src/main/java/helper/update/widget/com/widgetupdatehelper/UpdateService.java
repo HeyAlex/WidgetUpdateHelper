@@ -74,11 +74,11 @@ public class UpdateService extends IntentService {
     /**
      * Static method for starting update Widget with AppWidgetProvider.class and ids
      *
-     * @param context            context for intent
-     * @param widgetClass        for {@link ComponentName} associated with widget that will
-     *                           be updated
-     * @param dataBundle         bundle of data, that you need to build a RemoteViews
-     * @param widgetId           id that will be updated
+     * @param context     context for intent
+     * @param widgetClass for {@link ComponentName} associated with widget that will
+     *                    be updated
+     * @param dataBundle  bundle of data, that you need to build a RemoteViews
+     * @param widgetId    id that will be updated
      */
     public static void updateWidgets(Context context,
                                      Class<? extends AppWidgetProvider> widgetClass,
