@@ -71,12 +71,6 @@ dependencies {
 ### Why to use
 All updates are on background threads. So if you need to make RemoteViews depends on data from Database or Internet, that's what you need.
 
-### TODO
-
-* Add code generation, which would make binding `WidgetProvider` and `WidgetUpdater` in pre-compile time. 
-* Replace `android.app.IntentService` with `android.app.JobIntentService` for supporting Android O.
-
-
 ### License
 ```Text
 

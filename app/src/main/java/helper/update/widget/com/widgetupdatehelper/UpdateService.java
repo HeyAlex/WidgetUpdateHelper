@@ -1,11 +1,13 @@
 package helper.update.widget.com.widgetupdatehelper;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import java.util.Arrays;
@@ -29,6 +31,8 @@ public class UpdateService extends IntentService {
      * Key for gain {@link Bundle} that contains all data that you needed to build yor RemoteViews
      */
     public static final String EXTRA_DATA_BUNDLE = "extra_data_bundle";
+
+    public static final int NOTIFICATION_ID = 100;
 
     public UpdateService() {
         super("UpdateService");
@@ -68,7 +72,20 @@ public class UpdateService extends IntentService {
                                      Class<? extends AppWidgetProvider> widgetClass,
                                      Bundle dataBundle,
                                      int... widgetIds) {
-        context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetIds));
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1){
+            context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetIds));
+        } else {
+            context.startForegroundService(getIntentUpdateWidget(context, widgetClass, dataBundle , widgetIds));
+        }
+
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForeground(NOTIFICATION_ID, new Notification());
+        }
     }
 
     /**
@@ -83,7 +100,11 @@ public class UpdateService extends IntentService {
     public static void updateWidgets(Context context,
                                      Class<? extends AppWidgetProvider> widgetClass,
                                      Bundle dataBundle, int widgetId) {
-        context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetId));
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.N_MR1){
+            context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetId));
+        } else {
+            context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetId));
+        }
     }
 
     @Override
@@ -106,7 +127,6 @@ public class UpdateService extends IntentService {
                 }
                 Bundle bundle = intent.getBundleExtra(EXTRA_DATA_BUNDLE);
                 updateWidgets(provider, bundle, ids);
-
             } else {
                 LogWrapper.w(LOG_TAG, "cannot update widgets, intent missing value for " +
                         "EXTRA_PROVIDER");
@@ -115,6 +135,7 @@ public class UpdateService extends IntentService {
             // catch everything so the Service.stopSelf(int) will be called in any case
             LogWrapper.e(LOG_TAG, "Exception onHandleIntent " + e);
         }
+        stopForeground(true);
     }
 
     /**

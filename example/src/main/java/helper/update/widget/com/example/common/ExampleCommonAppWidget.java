@@ -32,9 +32,6 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
         Bundle bundle = new Bundle();
         bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION);
         bundle.putString("main_text", SingleRemoteViewBuilder.NEXT_TEXT);
-//        UpdateJobService.enqueueWork(context, UpdateJobService.class, 100,
-//                UpdateJobService.getIntentUpdateWidget(context, this.getClass(),
-//                        bundle, true, widgetIds));
         UpdateService.updateWidgets(context,
                 ExampleCommonAppWidget.class, bundle, widgetIds);
     }
@@ -53,12 +50,6 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                 int[] widgetIds = appWidgetManager.getAppWidgetIds(
                         new ComponentName(context, ExampleSingleAppWidget.class));
-
-
-                //i.putExtra(UpdateJobService.EXTRA_DATA_BUNDLE, intent.getBundleExtra(UpdateJobService.EXTRA_DATA_BUNDLE));
-                //UpdateJobService.enqueueWork(context, UpdateJobService.class, 100,
-                //        UpdateJobService.getIntentUpdateWidget(context, this.getClass(),
-                //                intent.getBundleExtra(UpdateService.EXTRA_DATA_BUNDLE), true, widgetIds));
                 UpdateService.updateWidgets(context, this.getClass(),
                         intent.getBundleExtra(UpdateService.EXTRA_DATA_BUNDLE), widgetIds);
             } else {

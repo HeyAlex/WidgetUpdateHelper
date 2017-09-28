@@ -4,6 +4,10 @@
 
     <application>
         <service android:name="helper.update.widget.com.widgetupdatehelper.UpdateService" />
+        <!--<service-->
+            <!--android:name="helper.update.widget.com.widgetupdatehelper.JobUpdateService"-->
+            <!--android:exported="false"-->
+            <!--android:permission="android.permission.BIND_JOB_SERVICE" />-->
     </application>
 
 </manifest>

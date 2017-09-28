@@ -1,8 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="helper.update.widget.com.example">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,6 +20,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/example_app_widget_single_info" />
         </receiver>
+
+        <service android:name="helper.update.widget.com.widgetupdatehelper.UpdateService" />
 
         <receiver
             android:name=".common.ExampleCommonAppWidget"
