@@ -64,7 +64,7 @@ To use this library add following to your *module's* `build.gradle`:
 
 ```groovy
 dependencies {
-    compile '....'
+    compile 'com.github.HeyAlex:WidgetUpdateHelper:1.0'
 }
 ```
 
@@ -73,5 +73,5 @@ All updates are on background threads. So if you need to make RemoteViews depend
 
 ### License
 ```Text
-
+WTFPL
 ```
