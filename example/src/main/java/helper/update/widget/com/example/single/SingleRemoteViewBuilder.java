@@ -77,7 +77,12 @@ public class SingleRemoteViewBuilder {
                 .putExtra(EXTRA_PROVIDER, new ComponentName(context, ExampleSingleAppWidget.class))
                 .putExtra(EXTRA_WIDGET_IDS, new int[]{widgetId})
                 .putExtra(EXTRA_DATA_BUNDLE, bundle);
-        return PendingIntent.getService(context, widgetId, updateServiceIntent,
-                PendingIntent.FLAG_CANCEL_CURRENT);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return PendingIntent.getForegroundService(context, widgetId, updateServiceIntent,
+                    PendingIntent.FLAG_CANCEL_CURRENT);
+        } else {
+            return PendingIntent.getService(context, widgetId, updateServiceIntent,
+                    PendingIntent.FLAG_CANCEL_CURRENT);
+        }
     }
 }
