@@ -72,8 +72,8 @@ public class UpdateService extends IntentService {
                                      Class<? extends AppWidgetProvider> widgetClass,
                                      Bundle dataBundle,
                                      int... widgetIds) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            context.startForegroundService(getIntentUpdateWidget(context, widgetClass, dataBundle , widgetIds));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetIds));
         } else {
             context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetIds));
         }
@@ -100,7 +100,7 @@ public class UpdateService extends IntentService {
     public static void updateWidgets(Context context,
                                      Class<? extends AppWidgetProvider> widgetClass,
                                      Bundle dataBundle, int widgetId) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetId));
         } else {
             context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetId));
