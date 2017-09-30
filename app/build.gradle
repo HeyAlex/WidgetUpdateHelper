@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.heyalex'
 
 android {
     compileSdkVersion 26
@@ -6,6 +8,9 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 26
+
+        version 1
+        versionName "1.0"
     }
 }
 
