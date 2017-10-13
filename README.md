@@ -35,12 +35,20 @@ Make an annotation `RemoteViewsUpdater` on `android.appwidget.AppWidgetProvider`
 public class ExampleSingleAppWidget extends AppWidgetProvider {
         @Override
         public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-            //...
+             // update widgets by following static method
+             UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, appWidgetIds);
         }
 
         @Override
         public void onEnabled(Context context) {
-            //...
+             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+             int[] widgetIds = appWidgetManager.getAppWidgetIds(
+                           new ComponentName(context, ExampleSingleAppWidget.class));
+           
+             // add some params for RemoteViews
+             Bundle bundle = new Bundle();
+             // update widgets by following static method
+             UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetIds);
         }
 
         @Override
