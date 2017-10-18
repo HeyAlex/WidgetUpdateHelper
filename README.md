@@ -1,6 +1,6 @@
 # WidgetUpdateHelper
 
-This library helps managing the updating widgets. Just update all your widget on background thread with `android.app.IntentService`, that provides that library.
+This library helps managing the updating widgets. Just update all your widgets on background thread with `android.app.IntentService`, that provides that library.
 
 Please, have a look at the **example** project.
 
@@ -35,7 +35,7 @@ Make an annotation `RemoteViewsUpdater` on `android.appwidget.AppWidgetProvider`
 public class ExampleSingleAppWidget extends AppWidgetProvider {
         @Override
         public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-             // update widgets by following static method
+             // update widgets
              UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, appWidgetIds);
         }
 
@@ -47,7 +47,8 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
            
              // add some params for RemoteViews
              Bundle bundle = new Bundle();
-             // update widgets by following static method
+             //...
+             // update widgets
              UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetIds);
         }
 
@@ -77,7 +78,8 @@ dependencies {
 ```
 
 ### Why to use
-All updates are on background threads. So if you need to make RemoteViews depends on data from Database or Internet, that's what you need.
+All updates are on background thread. So if you need to make RemoteViews depends on data from Database or Internet, that's what you need.
+Android O is also supported.
 
 ### License
 ```Text
