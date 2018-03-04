@@ -1,9 +1,14 @@
+# IDEA
 *.iml
+.idea/*
+!.idea/codeStyleSettings.xml
+!.idea/copyright
+
+# Gradle
 .gradle
+build
+/reports
+
+# Gradle Android
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
 /captures
-.externalNativeBuild
