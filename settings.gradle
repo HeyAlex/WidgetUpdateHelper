@@ -1,1 +1,1 @@
-include ':app', ':example'
+include ':widget-helper', ':example'

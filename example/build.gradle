@@ -28,6 +28,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':app')
+    compile project(':widget-helper')
     compile 'com.android.support:appcompat-v7:27.0.2'
 }
