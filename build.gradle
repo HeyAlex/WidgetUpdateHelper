@@ -1,7 +1,8 @@
 buildscript {
     ext.versions = [
             'kotlin': '1.2.30',
-            'supportLibrary': '27.0.2'
+            'supportLibrary': '27.0.2',
+            'atsl': '1.0.1'
     ]
 
     repositories {

@@ -16,4 +16,11 @@ android {
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
     implementation "com.android.support:support-compat:${versions.supportLibrary}"
+
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation "com.android.support:support-annotations:${versions.supportLibrary}"
+    androidTestImplementation "com.android.support.test:runner:${versions.atsl}"
+    androidTestImplementation "com.android.support.test:rules:${versions.atsl}"
+    androidTestImplementation "androidx.core:core-ktx:0.2"
+
 }
