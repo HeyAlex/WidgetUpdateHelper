@@ -10,9 +10,9 @@ import android.widget.RemoteViews;
 
 import helper.update.widget.com.example.R;
 import helper.update.widget.com.example.VectorUtil;
-import helper.update.widget.com.widgetupdatehelper.UpdateService;
+import heyalex.widgethelper.UpdateService;
 
-import static helper.update.widget.com.widgetupdatehelper.UpdateService.EXTRA_DATA_BUNDLE;
+import static heyalex.widgethelper.UpdateService.EXTRA_DATA_BUNDLE;
 
 
 public class CommonRemoteViewBuilder {

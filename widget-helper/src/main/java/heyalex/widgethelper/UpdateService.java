@@ -1,4 +1,4 @@
-package helper.update.widget.com.widgetupdatehelper;
+package heyalex.widgethelper;
 
 import android.app.IntentService;
 import android.app.Notification;

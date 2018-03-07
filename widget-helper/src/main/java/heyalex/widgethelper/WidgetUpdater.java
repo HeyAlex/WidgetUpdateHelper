@@ -1,4 +1,4 @@
-package helper.update.widget.com.widgetupdatehelper;
+package heyalex.widgethelper;
 
 import android.content.Context;
 import android.os.Bundle;

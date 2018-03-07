@@ -1,4 +1,4 @@
-package helper.update.widget.com.widgetupdatehelper;
+package heyalex.widgethelper;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

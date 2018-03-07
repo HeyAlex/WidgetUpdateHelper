@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="helper.update.widget.com.widgetupdatehelper">
+    package="heyalex.widgethelper">
 
     <application>
-        <service android:name="helper.update.widget.com.widgetupdatehelper.UpdateService" />
+        <service android:name="heyalex.widgethelper.UpdateService" />
     </application>
 
 </manifest>

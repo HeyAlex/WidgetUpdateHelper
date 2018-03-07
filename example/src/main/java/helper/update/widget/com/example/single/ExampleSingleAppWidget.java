@@ -6,8 +6,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
 
-import helper.update.widget.com.widgetupdatehelper.RemoteViewsUpdater;
-import helper.update.widget.com.widgetupdatehelper.UpdateService;
+import heyalex.widgethelper.RemoteViewsUpdater;
+import heyalex.widgethelper.UpdateService;
 
 @RemoteViewsUpdater(SingleUpdater.class)
 public class ExampleSingleAppWidget extends AppWidgetProvider {

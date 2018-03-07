@@ -1,7 +1,7 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
 // Aliases to other public API.
-package helper.update.widget.com.widgetupdatehelper.extensions
+package heyalex.widgethelper.extensions
 
 import android.support.annotation.ColorInt
 import android.support.annotation.DimenRes

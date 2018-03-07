@@ -9,8 +9,8 @@ import android.os.Bundle;
 
 import helper.update.widget.com.example.single.ExampleSingleAppWidget;
 import helper.update.widget.com.example.single.SingleRemoteViewBuilder;
-import helper.update.widget.com.widgetupdatehelper.RemoteViewsUpdater;
-import helper.update.widget.com.widgetupdatehelper.UpdateService;
+import heyalex.widgethelper.RemoteViewsUpdater;
+import heyalex.widgethelper.UpdateService;
 
 @RemoteViewsUpdater(CommonUpdater.class)
 public class ExampleCommonAppWidget extends AppWidgetProvider {

@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 
 import helper.update.widget.com.example.single.SingleRemoteViewBuilder;
-import helper.update.widget.com.widgetupdatehelper.WidgetUpdater;
+import heyalex.widgethelper.WidgetUpdater;
 
 public class CommonUpdater implements WidgetUpdater {
 
