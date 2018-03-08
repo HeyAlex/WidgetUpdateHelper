@@ -12,8 +12,6 @@ import helper.update.widget.com.example.R;
 import helper.update.widget.com.example.VectorUtil;
 import heyalex.widgethelper.WidgetUpdateService;
 
-import static heyalex.widgethelper.WidgetUpdateService.EXTRA_DATA_BUNDLE;
-
 
 public class CommonRemoteViewBuilder {
 
@@ -71,13 +69,16 @@ public class CommonRemoteViewBuilder {
         bundle.putString("action", action);
         bundle.putString("main_text", text);
 
-        Intent updateServiceIntent = new Intent(context, ExampleCommonAppWidget.class)
-                .setAction(ACTION_BUTTON)
-                .putExtra(WidgetUpdateService.EXTRA_WIDGET_IDS, widgetIds)
-                .putExtra(EXTRA_DATA_BUNDLE, bundle);
+        Intent updateServiceIntent = WidgetUpdateService.getIntentUpdateWidget(context,
+                ExampleCommonAppWidget.class, bundle, widgetIds);
 
 
-        return PendingIntent.getBroadcast(context, 0, updateServiceIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return PendingIntent.getForegroundService(context, 0, updateServiceIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        } else {
+            return PendingIntent.getService(context, 0, updateServiceIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        }
     }
 }

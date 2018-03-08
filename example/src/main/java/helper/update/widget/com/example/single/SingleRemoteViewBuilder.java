@@ -1,7 +1,6 @@
 package helper.update.widget.com.example.single;
 
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -12,11 +11,6 @@ import android.widget.RemoteViews;
 import helper.update.widget.com.example.R;
 import helper.update.widget.com.example.VectorUtil;
 import heyalex.widgethelper.WidgetUpdateService;
-
-import static heyalex.widgethelper.WidgetUpdateService.EXTRA_DATA_BUNDLE;
-import static heyalex.widgethelper.WidgetUpdateService.EXTRA_PROVIDER;
-import static heyalex.widgethelper.WidgetUpdateService.EXTRA_WIDGET_IDS;
-
 
 public class SingleRemoteViewBuilder {
 
@@ -73,11 +67,10 @@ public class SingleRemoteViewBuilder {
         Bundle bundle = new Bundle();
         bundle.putString("action", action + String.valueOf(widgetId));
         bundle.putString("main_text", text);
-        Intent updateServiceIntent = new Intent(context, WidgetUpdateService.class)
-                .putExtra(EXTRA_PROVIDER, new ComponentName(context, ExampleSingleAppWidget.class))
-                .putExtra(EXTRA_WIDGET_IDS, new int[]{widgetId})
-                .putExtra(EXTRA_DATA_BUNDLE, bundle);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        Intent updateServiceIntent = WidgetUpdateService.getIntentUpdateWidget(context,
+                ExampleSingleAppWidget.class, bundle, widgetId);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return PendingIntent.getForegroundService(context, widgetId, updateServiceIntent,
                     PendingIntent.FLAG_CANCEL_CURRENT);
         } else {

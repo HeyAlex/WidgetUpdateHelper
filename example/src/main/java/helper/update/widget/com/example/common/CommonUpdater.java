@@ -34,7 +34,5 @@ public class CommonUpdater implements WidgetUpdater {
         for (int id : ids) {
             appWidgetManager.updateAppWidget(id, remoteViews);
         }
-
-
     }
 }
