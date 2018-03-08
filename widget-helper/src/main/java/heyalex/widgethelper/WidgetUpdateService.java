@@ -15,8 +15,8 @@ import java.util.Arrays;
 /**
  * Update Service that helps update widget by ComponentName and Ids
  */
-public class UpdateService extends IntentService {
-    private static final String LOG_TAG = UpdateService.class.getSimpleName();
+public class WidgetUpdateService extends IntentService {
+    private static final String LOG_TAG = WidgetUpdateService.class.getSimpleName();
 
     /**
      * Key for gain {@link ComponentName} that associated with {@link AppWidgetProvider}
@@ -24,7 +24,7 @@ public class UpdateService extends IntentService {
     public static final String EXTRA_PROVIDER = "extra_provider";
     /**
      * Key for gain widget Ids that will be updated, if where is no Ids by this key,
-     * {@link UpdateService} will skip updating of this {@link ComponentName}
+     * {@link WidgetUpdateService} will skip updating of this {@link ComponentName}
      */
     public static final String EXTRA_WIDGET_IDS = "extra_widget_ids";
     /**
@@ -34,13 +34,13 @@ public class UpdateService extends IntentService {
 
     public static final int NOTIFICATION_ID = 100;
 
-    public UpdateService() {
-        super("UpdateService");
+    public WidgetUpdateService() {
+        super("WidgetUpdateService");
         setIntentRedelivery(true);
     }
 
     /**
-     * Static method for getting intent for {@link UpdateService} that will update widget
+     * Static method for getting intent for {@link WidgetUpdateService} that will update widget
      * class and ids if where is no widget ids, skip updating {@link ComponentName}
      *
      * @param context     context for intent
@@ -53,7 +53,7 @@ public class UpdateService extends IntentService {
                                                Class<? extends AppWidgetProvider> widgetClass,
                                                Bundle dataBundle, int... widgetIds) {
 
-        return new Intent(context, UpdateService.class)
+        return new Intent(context, WidgetUpdateService.class)
                 .putExtra(EXTRA_PROVIDER, new ComponentName(context, widgetClass))
                 .putExtra(EXTRA_WIDGET_IDS, widgetIds)
                 .putExtra(EXTRA_DATA_BUNDLE, dataBundle);

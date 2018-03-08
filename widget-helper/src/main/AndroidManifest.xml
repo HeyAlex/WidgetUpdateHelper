@@ -3,7 +3,7 @@
     package="heyalex.widgethelper">
 
     <application>
-        <service android:name="heyalex.widgethelper.UpdateService" />
+        <service android:name="heyalex.widgethelper.WidgetUpdateService" />
     </application>
 
 </manifest>

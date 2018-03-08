@@ -21,7 +21,7 @@
                 android:resource="@xml/example_app_widget_single_info" />
         </receiver>
 
-        <service android:name="heyalex.widgethelper.UpdateService" />
+        <service android:name="heyalex.widgethelper.WidgetUpdateService" />
 
         <receiver
             android:name=".common.ExampleCommonAppWidget"

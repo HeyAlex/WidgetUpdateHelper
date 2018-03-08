@@ -10,9 +10,9 @@ import android.widget.RemoteViews;
 
 import helper.update.widget.com.example.R;
 import helper.update.widget.com.example.VectorUtil;
-import heyalex.widgethelper.UpdateService;
+import heyalex.widgethelper.WidgetUpdateService;
 
-import static heyalex.widgethelper.UpdateService.EXTRA_DATA_BUNDLE;
+import static heyalex.widgethelper.WidgetUpdateService.EXTRA_DATA_BUNDLE;
 
 
 public class CommonRemoteViewBuilder {
@@ -73,7 +73,7 @@ public class CommonRemoteViewBuilder {
 
         Intent updateServiceIntent = new Intent(context, ExampleCommonAppWidget.class)
                 .setAction(ACTION_BUTTON)
-                .putExtra(UpdateService.EXTRA_WIDGET_IDS, widgetIds)
+                .putExtra(WidgetUpdateService.EXTRA_WIDGET_IDS, widgetIds)
                 .putExtra(EXTRA_DATA_BUNDLE, bundle);
 
 

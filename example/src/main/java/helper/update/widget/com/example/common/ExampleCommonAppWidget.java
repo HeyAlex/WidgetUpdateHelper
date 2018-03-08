@@ -10,7 +10,7 @@ import android.os.Bundle;
 import helper.update.widget.com.example.single.ExampleSingleAppWidget;
 import helper.update.widget.com.example.single.SingleRemoteViewBuilder;
 import heyalex.widgethelper.RemoteViewsUpdater;
-import heyalex.widgethelper.UpdateService;
+import heyalex.widgethelper.WidgetUpdateService;
 
 @RemoteViewsUpdater(CommonUpdater.class)
 public class ExampleCommonAppWidget extends AppWidgetProvider {
@@ -19,7 +19,7 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
         Bundle bundle = new Bundle();
         bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION);
         bundle.putString("main_text", SingleRemoteViewBuilder.NEXT_TEXT);
-        UpdateService.updateWidgets(context,
+        WidgetUpdateService.updateWidgets(context,
                 ExampleCommonAppWidget.class, bundle, appWidgetIds);
     }
 
@@ -32,7 +32,7 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
         Bundle bundle = new Bundle();
         bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION);
         bundle.putString("main_text", SingleRemoteViewBuilder.NEXT_TEXT);
-        UpdateService.updateWidgets(context,
+        WidgetUpdateService.updateWidgets(context,
                 ExampleCommonAppWidget.class, bundle, widgetIds);
     }
 
@@ -50,8 +50,8 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                 int[] widgetIds = appWidgetManager.getAppWidgetIds(
                         new ComponentName(context, ExampleSingleAppWidget.class));
-                UpdateService.updateWidgets(context, this.getClass(),
-                        intent.getBundleExtra(UpdateService.EXTRA_DATA_BUNDLE), widgetIds);
+                WidgetUpdateService.updateWidgets(context, this.getClass(),
+                        intent.getBundleExtra(WidgetUpdateService.EXTRA_DATA_BUNDLE), widgetIds);
             } else {
                 super.onReceive(context, intent);
             }

@@ -7,7 +7,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import heyalex.widgethelper.RemoteViewsUpdater;
-import heyalex.widgethelper.UpdateService;
+import heyalex.widgethelper.WidgetUpdateService;
 
 @RemoteViewsUpdater(SingleUpdater.class)
 public class ExampleSingleAppWidget extends AppWidgetProvider {
@@ -18,7 +18,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
             Bundle bundle = new Bundle();
             bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION + String.valueOf(widgetId));
             bundle.putString("main_text", SingleRemoteViewBuilder.NEXT_TEXT);
-            UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetId);
+            WidgetUpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetId);
         }
     }
 
@@ -33,7 +33,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
             bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION + String.valueOf(widgetId));
             bundle.putString("main_text", SingleRemoteViewBuilder.PREVIOUS_TEXT);
 
-            UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetId);
+            WidgetUpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetId);
         }
     }
 

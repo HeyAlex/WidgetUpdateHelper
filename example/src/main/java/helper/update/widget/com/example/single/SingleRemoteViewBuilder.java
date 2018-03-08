@@ -11,11 +11,11 @@ import android.widget.RemoteViews;
 
 import helper.update.widget.com.example.R;
 import helper.update.widget.com.example.VectorUtil;
-import heyalex.widgethelper.UpdateService;
+import heyalex.widgethelper.WidgetUpdateService;
 
-import static heyalex.widgethelper.UpdateService.EXTRA_DATA_BUNDLE;
-import static heyalex.widgethelper.UpdateService.EXTRA_PROVIDER;
-import static heyalex.widgethelper.UpdateService.EXTRA_WIDGET_IDS;
+import static heyalex.widgethelper.WidgetUpdateService.EXTRA_DATA_BUNDLE;
+import static heyalex.widgethelper.WidgetUpdateService.EXTRA_PROVIDER;
+import static heyalex.widgethelper.WidgetUpdateService.EXTRA_WIDGET_IDS;
 
 
 public class SingleRemoteViewBuilder {
@@ -73,7 +73,7 @@ public class SingleRemoteViewBuilder {
         Bundle bundle = new Bundle();
         bundle.putString("action", action + String.valueOf(widgetId));
         bundle.putString("main_text", text);
-        Intent updateServiceIntent = new Intent(context, UpdateService.class)
+        Intent updateServiceIntent = new Intent(context, WidgetUpdateService.class)
                 .putExtra(EXTRA_PROVIDER, new ComponentName(context, ExampleSingleAppWidget.class))
                 .putExtra(EXTRA_WIDGET_IDS, new int[]{widgetId})
                 .putExtra(EXTRA_DATA_BUNDLE, bundle);
