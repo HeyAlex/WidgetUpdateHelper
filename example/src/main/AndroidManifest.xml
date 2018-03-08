@@ -22,6 +22,7 @@
         </receiver>
 
         <service android:name="heyalex.widgethelper.WidgetUpdateService" />
+        <service android:name=".list.SampleRemoteService" />
 
         <receiver
             android:name=".common.ExampleCommonAppWidget"
