@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import java.lang.annotation.Annotation;
+import java.lang.annotation.AnnotationFormatError;
 import java.util.Arrays;
 
 /**
@@ -135,12 +137,11 @@ public class WidgetUpdateService extends IntentService {
         } else {
             LogWrapper.d(LOG_TAG, String.format("onHandleIntent -> updating %s, ids=%s",
                     provider.toShortString(), Arrays.toString(ids)));
-            Class<? extends WidgetUpdater> clazz = null;
+            Class clazz = null;
             try {
-
-                clazz = ((RemoteViewsUpdater) Class
-                        .forName(provider.getClassName()).getAnnotations()[0]).value();
-                WidgetUpdater builder = clazz.newInstance();
+                clazz = Class.forName(provider.getClassName());
+                Annotation annotation = findAnnotation(clazz);
+                WidgetUpdater builder = ((RemoteViewsUpdater) annotation).value().newInstance();
                 if (builder != null) {
                     builder.update(this, dataBundle, ids);
                 } else {
@@ -162,5 +163,23 @@ public class WidgetUpdateService extends IntentService {
                         + " empty constructor that is public. Error: " + e.getMessage());
             }
         }
+    }
+
+    /**
+     * @param clazz that contains @RemoteViewsUpdater annotation
+     * @return annotation @RemoteViewsUpdater
+     * @throws AnnotationFormatError if where is no {@link RemoteViewsUpdater} annotation in clazz
+     */
+    private Annotation findAnnotation(Class clazz) {
+        Annotation[] annotations = clazz.getAnnotations();
+
+        for (Annotation annotation : annotations) {
+            if (annotation.annotationType() == AnnotationFormatError.class) {
+                return annotation;
+            }
+        }
+
+        throw new AnnotationFormatError(clazz.getName() + " doesn't contains " +
+                "annotation @RemoteViewsUpdater");
     }
 }
