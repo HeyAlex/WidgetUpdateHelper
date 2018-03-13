@@ -174,7 +174,7 @@ public class WidgetUpdateService extends IntentService {
         Annotation[] annotations = clazz.getAnnotations();
 
         for (Annotation annotation : annotations) {
-            if (annotation.annotationType() == AnnotationFormatError.class) {
+            if (annotation.annotationType() == RemoteViewsUpdater.class) {
                 return annotation;
             }
         }
