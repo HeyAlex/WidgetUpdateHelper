@@ -18,7 +18,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
             Bundle bundle = new Bundle();
             bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION + String.valueOf(widgetId));
             bundle.putString("main_text", SingleRemoteViewBuilder.NEXT_TEXT);
-            WidgetUpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetId);
+            WidgetUpdateService.updateWidgets(context, this, bundle, widgetId);
         }
     }
 
@@ -33,7 +33,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
             bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION + String.valueOf(widgetId));
             bundle.putString("main_text", SingleRemoteViewBuilder.PREVIOUS_TEXT);
 
-            WidgetUpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetId);
+            WidgetUpdateService.updateWidgets(context, this, bundle, widgetId);
         }
     }
 

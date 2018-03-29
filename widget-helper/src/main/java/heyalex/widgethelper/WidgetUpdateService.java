@@ -65,19 +65,19 @@ public class WidgetUpdateService extends IntentService {
      * Static method for starting update Widget with AppWidgetProvider.class and ids
      *
      * @param context     context for intent
-     * @param widgetClass for {@link ComponentName} associated with widget that will
+     * @param provider for {@link ComponentName} associated with widget that will
      *                    be updated
      * @param dataBundle  bundle of data, that you need to build a RemoteViews
      * @param widgetIds   ids that will be updated
      */
     public static void updateWidgets(Context context,
-                                     Class<? extends AppWidgetProvider> widgetClass,
+                                     AppWidgetProvider provider,
                                      Bundle dataBundle,
                                      int... widgetIds) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetIds));
+            context.startForegroundService(getIntentUpdateWidget(context, provider.getClass(), dataBundle, widgetIds));
         } else {
-            context.startService(getIntentUpdateWidget(context, widgetClass, dataBundle, widgetIds));
+            context.startService(getIntentUpdateWidget(context, provider.getClass(), dataBundle, widgetIds));
         }
 
     }

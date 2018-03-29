@@ -20,7 +20,7 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
         bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION);
         bundle.putString("main_text", SingleRemoteViewBuilder.NEXT_TEXT);
         WidgetUpdateService.updateWidgets(context,
-                ExampleCommonAppWidget.class, bundle, appWidgetIds);
+                this, bundle, appWidgetIds);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
         bundle.putString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION);
         bundle.putString("main_text", SingleRemoteViewBuilder.NEXT_TEXT);
         WidgetUpdateService.updateWidgets(context,
-                ExampleCommonAppWidget.class, bundle, widgetIds);
+                this, bundle, widgetIds);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ExampleCommonAppWidget extends AppWidgetProvider {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
                 int[] widgetIds = appWidgetManager.getAppWidgetIds(
                         new ComponentName(context, ExampleSingleAppWidget.class));
-                WidgetUpdateService.updateWidgets(context, this.getClass(),
+                WidgetUpdateService.updateWidgets(context, this,
                         intent.getBundleExtra(WidgetUpdateService.EXTRA_DATA_BUNDLE), widgetIds);
             } else {
                 super.onReceive(context, intent);

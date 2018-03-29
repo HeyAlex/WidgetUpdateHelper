@@ -36,7 +36,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
         @Override
         public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
              // update widgets
-             UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, appWidgetIds);
+             UpdateService.updateWidgets(context, this, bundle, appWidgetIds);
         }
 
         @Override
@@ -49,7 +49,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
              Bundle bundle = new Bundle();
              //...
              // update widgets
-             UpdateService.updateWidgets(context, ExampleSingleAppWidget.class, bundle, widgetIds);
+             UpdateService.updateWidgets(context, this, bundle, widgetIds);
         }
 
         @Override
