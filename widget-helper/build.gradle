@@ -22,5 +22,5 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:${versions.atsl}"
     androidTestImplementation "com.android.support.test:rules:${versions.atsl}"
     androidTestImplementation "androidx.core:core-ktx:0.2"
-
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.31"
 }

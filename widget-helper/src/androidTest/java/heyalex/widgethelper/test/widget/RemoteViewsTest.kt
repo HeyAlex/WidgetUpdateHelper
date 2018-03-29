@@ -1,4 +1,4 @@
-package heyalex.widgethelper.test
+package heyalex.widgethelper.test.widget
 
 import android.content.Context
 import android.graphics.Color
@@ -13,6 +13,8 @@ import android.widget.RemoteViews
 import android.widget.TextView
 import androidx.graphics.drawable.toBitmap
 import heyalex.widgethelper.extensions.*
+import heyalex.widgethelper.test.R
+import heyalex.widgethelper.test.TestActivity
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
