@@ -24,7 +24,7 @@ class WidgetUpdateServiceTest {
 
     @Test
     fun newInstanceOfWidgetUpdate() {
-        newInstanceWidgetupdate()
+        newInstanceOfBuilder()
         assertTrue(true)
     }
 
@@ -46,19 +46,14 @@ class WidgetUpdateServiceTest {
                 "annotation @RemoteViewsUpdater")
     }
 
-    private fun newInstanceWidgetupdate() {
+    private fun newInstanceOfBuilder() {
         var clazz: Class<*>? = null
         try {
             clazz = Class.forName(ComponentName(rule.activity.applicationContext,
                     AppWidgetUpdateTest::class.java.name).className)
             val annotation = findAnnotation(clazz)
             val builder = (annotation as RemoteViewsUpdater).value.objectInstance
-            if (builder != null) {
-                builder.update(rule.activity.applicationContext, null, 0)
-            } else {
-                //LogWrapper.w(LOG_TAG, "cannot update widgets, no builder set for given " + "EXTRA_PROVIDER")
-            }
-
+            builder?.update(rule.activity.applicationContext, null, 0)
         } catch (e: ClassNotFoundException) {
             throw InstantiationException("Unable to instantiate WidgetBuilder " +
                     clazz!!.name + ": make sure class name exists, is public, and has an"
