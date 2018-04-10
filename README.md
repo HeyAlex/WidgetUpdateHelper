@@ -8,9 +8,8 @@ Please, have a look at the **example** project.
 
 **WidgetBuilder**
 
-There is an interface `WidgetBuilder`, which has only one method `update(Context context, Bundle dataBundle, int... ids)`, that called in `UpdateService`, that contains WidgetUpdateLibrary. 
+There is an interface `WidgetUpdater`, which has only one method `update(Context context, Bundle dataBundle, int... ids)`. 
 
-Need to implement that interface.
 ```java
 public class SingleUpdater implements WidgetUpdater {
     @Override
@@ -28,7 +27,8 @@ public class SingleUpdater implements WidgetUpdater {
 
 **WidgetProvider**
 
-Make an annotation `RemoteViewsUpdater` on `android.appwidget.AppWidgetProvider` with class that implements `WidgetBuilder`.
+When creating your own widget you can use `RemoteViewsUpdater` annotation to link the `WidgetUpdater`'s child with your `android.appwidget.AppWidgetProvider` as below.
+`WidgetUpdateService` is an `android.app.IntentService` which will invokes your `WidgetUpdater` by calling method `updateWidgets(Context context, AppWidgetsProvider provider, Bundle dataBundle, int... ids)`.
 
 ```java
 @RemoteViewsUpdater(SingleUpdater.class)
@@ -36,7 +36,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
         @Override
         public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
              // update widgets
-             UpdateService.updateWidgets(context, this, bundle, appWidgetIds);
+             WidgetUpdateService.updateWidgets(context, this, bundle, appWidgetIds);
         }
 
         @Override
@@ -49,7 +49,7 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
              Bundle bundle = new Bundle();
              //...
              // update widgets
-             UpdateService.updateWidgets(context, this, bundle, widgetIds);
+             WidgetUpdateService.updateWidgets(context, this, bundle, widgetIds);
         }
 
         @Override
