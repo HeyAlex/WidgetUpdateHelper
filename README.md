@@ -59,6 +59,21 @@ public class ExampleSingleAppWidget extends AppWidgetProvider {
 }
 ```
 
+**RemoteViews extensions**
+
+List of helper extensions on RemoteViews:
+```
+method public static void setBackgroundColor(android.widget.RemoteViews, @IdRes int viewId, @ColorInt int color);
+method public static void setBackgroundResource(android.widget.RemoteViews, @IdRes int viewId, @DrawableRes int drawable);
+method public static void setEnabled(android.widget.RemoteViews, @IdRes int viewId, boolean enabled);
+method public static void setImageViewAlpha(android.widget.RemoteViews, @IdRes int viewId, @IntRange(from=0L, to=255L) int alpha);
+method public static void setImageViewMaxHeight(android.widget.RemoteViews, @IdRes int viewId, @DimenRes int height);
+method public static void setImageViewMaxWidth(android.widget.RemoteViews, @IdRes int viewId, @DimenRes int width);
+method public static void setTextViewMaxLines(android.widget.RemoteViews, @IdRes int viewId, int lines);
+method public static void setTextViewMinLines(android.widget.RemoteViews, @IdRes int viewId, int lines);
+method public static void setTextViewPaintFlags(android.widget.RemoteViews, @IdRes int viewId, int flags);
+method public static void setTextViewTextSize(android.widget.RemoteViews, @IdRes int viewId, @DimenRes float size);
+```
 
 ## Integration
 The library is published to the jcenter repository, thus your *project's* `build.gradle` must contain:
