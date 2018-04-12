@@ -79,9 +79,12 @@ method public static void setTextViewTextSize(android.widget.RemoteViews, @IdRes
 The library is published to the jcenter repository, thus your *project's* `build.gradle` must contain:
 
 ```groovy
-repositories {
-    jcenter()
-}
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
 To use this library add following to your *module's* `build.gradle`:
