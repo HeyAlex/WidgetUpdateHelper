@@ -229,9 +229,10 @@ public class WidgetUpdateService extends IntentService {
     }
 
     /**
-     * @param clazz that contains @RemoteViewsUpdater annotation
+     * @param clazz that contains annotation
+     * @param annotationClazz annotation
      * @return annotation @RemoteViewsUpdater
-     * @throws AnnotationFormatError if where is no {@link RemoteViewsUpdater} annotation in clazz
+     * @throws AnnotationFormatError if where is no [RemoteViewsUpdater] annotation in clazz
      */
     private Annotation findAnnotation(Class clazz, Class annotationClazz) {
         Annotation[] annotations = clazz.getAnnotations();
