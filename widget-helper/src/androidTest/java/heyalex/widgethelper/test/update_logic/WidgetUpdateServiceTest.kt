@@ -3,11 +3,14 @@ package heyalex.widgethelper.test.update_logic
 import android.content.ComponentName
 import android.support.test.rule.ActivityTestRule
 import heyalex.widgethelper.RemoteViewsUpdater
+import heyalex.widgethelper.UpdateWidget
 import heyalex.widgethelper.test.TestActivity
 import junit.framework.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import java.lang.annotation.AnnotationFormatError
+import java.util.concurrent.TimeUnit
+import kotlin.reflect.KClass
 
 class WidgetUpdateServiceTest {
 
@@ -16,11 +19,23 @@ class WidgetUpdateServiceTest {
     val rule = ActivityTestRule<TestActivity>(TestActivity::class.java)
 
     @Test
-    fun testAnnotationFinding() {
-        findAnnotation(AppWidgetUpdateTest::class.java)
+    fun testFindingRemoteViewsUpdater() {
+        findAnnotation(AppWidgetUpdateTest::class.java, RemoteViewsUpdater::class)
         assertTrue(true)
     }
 
+    @Test
+    fun testFindingUpdateWidget() {
+        findAnnotation(AppWidgetUpdateTest::class.java, UpdateWidget::class)
+        assertTrue(true)
+    }
+
+    @Test
+    fun testGettingValueUpdateWidget() {
+        val annotation = findAnnotation(AppWidgetUpdateTest::class.java, UpdateWidget::class) as UpdateWidget
+        assertTrue(annotation.timeValue == 1L)
+        assertTrue(annotation.timeUnit == TimeUnit.DAYS)
+    }
 
     @Test
     fun newInstanceOfWidgetUpdate() {
@@ -29,21 +44,21 @@ class WidgetUpdateServiceTest {
     }
 
     /**
-     * @param clazz that contains @RemoteViewsUpdater annotation
+     * @param clazz that contains annotation
+     * @param annotationClazz annotation
      * @return annotation @RemoteViewsUpdater
      * @throws AnnotationFormatError if where is no [RemoteViewsUpdater] annotation in clazz
      */
-    private fun findAnnotation(clazz: Class<*>): Annotation {
+    private fun findAnnotation(clazz: Class<*>, annotationClazz: KClass<*>): Annotation {
         val annotations = clazz.annotations
 
-        for (annotation in annotations) {
-            if (annotation.annotationClass == RemoteViewsUpdater::class) {
-                return annotation
+        annotations.forEach {
+            if (it.annotationClass == annotationClazz) {
+                return it
             }
         }
-
         throw AnnotationFormatError(clazz.name + " doesn't contains " +
-                "annotation @RemoteViewsUpdater")
+                "annotation @" + annotationClazz.simpleName)
     }
 
     private fun newInstanceOfBuilder() {
@@ -51,7 +66,7 @@ class WidgetUpdateServiceTest {
         try {
             clazz = Class.forName(ComponentName(rule.activity.applicationContext,
                     AppWidgetUpdateTest::class.java.name).className)
-            val annotation = findAnnotation(clazz)
+            val annotation = findAnnotation(clazz, RemoteViewsUpdater::class)
             val builder = (annotation as RemoteViewsUpdater).value.objectInstance
             builder?.update(rule.activity.applicationContext, null, 0)
         } catch (e: ClassNotFoundException) {
@@ -67,7 +82,6 @@ class WidgetUpdateServiceTest {
                     clazz!!.name + ": make sure class name exists, is public, and has an"
                     + " empty constructor that is public. Error: " + e.message)
         }
-
     }
 }
 

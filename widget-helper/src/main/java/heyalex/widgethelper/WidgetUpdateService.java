@@ -1,7 +1,9 @@
 package heyalex.widgethelper;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -75,11 +77,72 @@ public class WidgetUpdateService extends IntentService {
                                      Bundle dataBundle,
                                      int... widgetIds) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            context.startForegroundService(getIntentUpdateWidget(context, provider.getClass(),
+                    dataBundle, widgetIds));
+        } else {
+            context.startService(getIntentUpdateWidget(context, provider.getClass(), dataBundle,
+                    widgetIds));
+        }
+    }
+
+    public static void scheduleWidget(Context context,
+                                     AppWidgetProvider provider,
+                                     Bundle dataBundle,
+                                     int... widgetIds) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(getIntentUpdateWidget(context, provider.getClass(), dataBundle, widgetIds));
         } else {
             context.startService(getIntentUpdateWidget(context, provider.getClass(), dataBundle, widgetIds));
         }
+    }
 
+    public void setupAlarm(Context context, AppWidgetProvider provider, Bundle dataBundle) {
+        final AlarmManager alarmManager = (AlarmManager) context
+                .getSystemService(Context.ALARM_SERVICE);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] widgetIds = appWidgetManager.getAppWidgetIds(
+                new ComponentName(context, provider.getClass()));
+        Intent intent = getIntentUpdateWidget(context, provider.getClass(), dataBundle,
+                widgetIds);
+        PendingIntent pendingIntent = getPendingIntent(context, intent);
+
+        alarmManager.cancel(pendingIntent);
+
+        UpdateWidget annotation = (UpdateWidget) findAnnotation(provider.getClass(), UpdateWidget.class);
+        long millis = annotation.timeUnit().toMillis(annotation.timeValue());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, millis,
+                    pendingIntent);
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, millis,
+                        pendingIntent);
+            } else {
+                alarmManager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
+            }
+        }
+    }
+
+    public void stopAlarm(Context context, AppWidgetProvider provider) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] widgetIds = appWidgetManager.getAppWidgetIds(
+                new ComponentName(context, provider.getClass()));
+        Intent intent = getIntentUpdateWidget(context, provider.getClass(), null,
+                widgetIds);
+        PendingIntent pendingIntent = getPendingIntent(context, intent);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+    }
+
+    private static PendingIntent getPendingIntent(Context context, Intent intent) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            return PendingIntent.getForegroundService(context, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        } else {
+            return PendingIntent.getService(context, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        }
     }
 
     @Override
@@ -140,7 +203,7 @@ public class WidgetUpdateService extends IntentService {
             Class clazz = null;
             try {
                 clazz = Class.forName(provider.getClassName());
-                Annotation annotation = findAnnotation(clazz);
+                Annotation annotation = findAnnotation(clazz, RemoteViewsUpdater.class);
                 WidgetUpdater builder = ((RemoteViewsUpdater) annotation).value().newInstance();
                 if (builder != null) {
                     builder.update(this, dataBundle, ids);
@@ -170,11 +233,11 @@ public class WidgetUpdateService extends IntentService {
      * @return annotation @RemoteViewsUpdater
      * @throws AnnotationFormatError if where is no {@link RemoteViewsUpdater} annotation in clazz
      */
-    private Annotation findAnnotation(Class clazz) {
+    private Annotation findAnnotation(Class clazz, Class annotationClazz) {
         Annotation[] annotations = clazz.getAnnotations();
 
         for (Annotation annotation : annotations) {
-            if (annotation.annotationType() == RemoteViewsUpdater.class) {
+            if (annotation.annotationType() == annotationClazz) {
                 return annotation;
             }
         }
