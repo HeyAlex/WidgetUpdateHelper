@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="heyalex.widgethelper">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application>
         <service android:name="heyalex.widgethelper.WidgetUpdateService" />
     </application>
