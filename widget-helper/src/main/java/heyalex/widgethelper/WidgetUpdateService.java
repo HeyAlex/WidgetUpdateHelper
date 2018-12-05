@@ -160,9 +160,7 @@ public class WidgetUpdateService extends IntentService {
             }
 
             Notification.Builder notificationBuilder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
-            Notification notification = notificationBuilder.setOngoing(true)
-                    .build();
-            startForeground(NOTIFICATION_ID, notification);
+            startForeground(NOTIFICATION_ID, notificationBuilder.build());
         }
     }
 
