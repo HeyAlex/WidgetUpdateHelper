@@ -3,12 +3,13 @@ package helper.update.widget.com.example.single;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import heyalex.widgethelper.WidgetUpdater;
 
-public class SingleUpdater implements WidgetUpdater {
+public class SingleUpdater extends WidgetUpdater {
     @Override
-    public void update(Context context, Bundle dataBundle, int... ids) {
+    public void update(@NonNull Context context, Bundle dataBundle, int... ids) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         //get action for our RemoteViews button
         String action = dataBundle.getString("action", SingleRemoteViewBuilder.PREVIOUS_ACTION);
