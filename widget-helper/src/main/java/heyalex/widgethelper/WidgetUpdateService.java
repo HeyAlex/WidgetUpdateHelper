@@ -2,9 +2,6 @@ package heyalex.widgethelper;
 
 import android.app.AlarmManager;
 import android.app.IntentService;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -68,11 +65,11 @@ public class WidgetUpdateService extends IntentService {
     /**
      * Static method for starting update Widget with AppWidgetProvider.class and ids
      *
-     * @param context     context for intent
-     * @param provider for {@link ComponentName} associated with widget that will
-     *                    be updated
-     * @param dataBundle  bundle of data, that you need to build a RemoteViews
-     * @param widgetIds   ids that will be updated
+     * @param context    context for intent
+     * @param provider   for {@link ComponentName} associated with widget that will
+     *                   be updated
+     * @param dataBundle bundle of data, that you need to build a RemoteViews
+     * @param widgetIds  ids that will be updated
      */
     public static void updateWidgets(Context context,
                                      AppWidgetProvider provider,
@@ -88,9 +85,9 @@ public class WidgetUpdateService extends IntentService {
     }
 
     public static void scheduleWidget(Context context,
-                                     AppWidgetProvider provider,
-                                     Bundle dataBundle,
-                                     int... widgetIds) {
+                                      AppWidgetProvider provider,
+                                      Bundle dataBundle,
+                                      int... widgetIds) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(getIntentUpdateWidget(context, provider.getClass(), dataBundle, widgetIds));
         } else {
@@ -98,7 +95,7 @@ public class WidgetUpdateService extends IntentService {
         }
     }
 
-    public void setupAlarm(Context context, AppWidgetProvider provider, Bundle dataBundle) {
+    private void setupAlarm(Context context, AppWidgetProvider provider, Bundle dataBundle) {
         final AlarmManager alarmManager = (AlarmManager) context
                 .getSystemService(Context.ALARM_SERVICE);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -148,23 +145,6 @@ public class WidgetUpdateService extends IntentService {
     }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String NOTIFICATION_CHANNEL_ID = "widget updates";
-            String channelName = "Update Widget";
-            NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            if(manager != null) {
-                manager.createNotificationChannel(chan);
-            }
-
-            Notification.Builder notificationBuilder = new Notification.Builder(this, NOTIFICATION_CHANNEL_ID);
-            startForeground(NOTIFICATION_ID, notificationBuilder.build());
-        }
-    }
-
-    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogWrapper.d(LOG_TAG, String.format("onStartCommand -> intent=%s, flags=%s, startId=%s",
                 intent, flags, startId));
@@ -208,39 +188,47 @@ public class WidgetUpdateService extends IntentService {
         if (ids.length == 0) {
             LogWrapper.d(LOG_TAG, String.format("onHandleIntent -> skipping update of %s, no ids",
                     provider.toShortString()));
-        } else {
-            LogWrapper.d(LOG_TAG, String.format("onHandleIntent -> updating %s, ids=%s",
-                    provider.toShortString(), Arrays.toString(ids)));
-            Class clazz = null;
-            try {
-                clazz = Class.forName(provider.getClassName());
-                Annotation annotation = findAnnotation(clazz, RemoteViewsUpdater.class);
-                WidgetUpdater builder = ((RemoteViewsUpdater) annotation).value().newInstance();
-                if (builder != null) {
-                    builder.update(this, dataBundle, ids);
-                } else {
-                    LogWrapper.w(LOG_TAG, "cannot update widgets, no builder set for given " +
-                            "EXTRA_PROVIDER");
-                }
+            return;
+        }
 
-            } catch (ClassNotFoundException e) {
-                throw new InstantiationException("Unable to instantiate WidgetBuilder " +
-                        clazz.getName() + ": make sure class name exists, is public, and has an"
-                        + " empty constructor that is public. Error: " + e.getMessage());
-            } catch (IllegalAccessException e) {
-                throw new InstantiationException("Unable to instantiate WidgetBuilder " +
-                        clazz.getName() + ": make sure class name exists, is public, and has an"
-                        + " empty constructor that is public. Error: " + e.getMessage());
-            } catch (InstantiationException e) {
-                throw new InstantiationException("Unable to instantiate WidgetBuilder " +
-                        clazz.getName() + ": make sure class name exists, is public, and has an"
-                        + " empty constructor that is public. Error: " + e.getMessage());
+        LogWrapper.d(LOG_TAG, String.format("onHandleIntent -> updating %s, ids=%s",
+                provider.toShortString(), Arrays.toString(ids)));
+        Class clazz = null;
+        try {
+            clazz = Class.forName(provider.getClassName());
+            Annotation annotation = findAnnotation(clazz, RemoteViewsUpdater.class);
+            WidgetUpdater builder = ((RemoteViewsUpdater) annotation).value().newInstance();
+            if (builder != null) {
+                invokeNotification(builder);
+                builder.update(this, dataBundle, ids);
+            } else {
+                LogWrapper.w(LOG_TAG, "cannot update widgets, no builder set for given " +
+                        "EXTRA_PROVIDER");
             }
+
+        } catch (ClassNotFoundException e) {
+            throw new InstantiationException("Unable to instantiate WidgetBuilder " +
+                    clazz.getName() + ": make sure class name exists, is public, and has an"
+                    + " empty constructor that is public. Error: " + e.getMessage());
+        } catch (IllegalAccessException e) {
+            throw new InstantiationException("Unable to instantiate WidgetBuilder " +
+                    clazz.getName() + ": make sure class name exists, is public, and has an"
+                    + " empty constructor that is public. Error: " + e.getMessage());
+        } catch (InstantiationException e) {
+            throw new InstantiationException("Unable to instantiate WidgetBuilder " +
+                    clazz.getName() + ": make sure class name exists, is public, and has an"
+                    + " empty constructor that is public. Error: " + e.getMessage());
+        }
+    }
+
+    private void invokeNotification(WidgetUpdater builder) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForeground(NOTIFICATION_ID, builder.makeNotification(this));
         }
     }
 
     /**
-     * @param clazz that contains annotation
+     * @param clazz           that contains annotation
      * @param annotationClazz annotation
      * @return annotation @RemoteViewsUpdater
      * @throws AnnotationFormatError if where is no [RemoteViewsUpdater] annotation in clazz

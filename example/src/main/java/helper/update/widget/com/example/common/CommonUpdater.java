@@ -4,15 +4,16 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
 
 import helper.update.widget.com.example.single.SingleRemoteViewBuilder;
 import heyalex.widgethelper.WidgetUpdater;
 
-public class CommonUpdater implements WidgetUpdater {
+public class CommonUpdater extends WidgetUpdater {
 
     @Override
-    public void update(Context context, Bundle dataBundle, int... ids) {
+    public void update(@NonNull Context context, Bundle dataBundle, int... ids) {
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         //get action for our RemoteViews button
