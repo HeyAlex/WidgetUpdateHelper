@@ -11,7 +11,7 @@ import android.widget.RemoteViews;
 import helper.update.widget.com.example.R;
 import heyalex.widgethelper.WidgetUpdater;
 
-public class ListRemoteViewUpdater implements WidgetUpdater {
+public class ListRemoteViewUpdater extends WidgetUpdater {
     @Override
     public void update(Context context, Bundle dataBundle, int... ids) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
