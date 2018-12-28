@@ -3,13 +3,11 @@ package heyalex.widgethelper.test.update_logic
 import android.content.ComponentName
 import android.support.test.rule.ActivityTestRule
 import heyalex.widgethelper.RemoteViewsUpdater
-import heyalex.widgethelper.UpdateWidget
 import heyalex.widgethelper.test.TestActivity
 import junit.framework.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import java.lang.annotation.AnnotationFormatError
-import java.util.concurrent.TimeUnit
 import kotlin.reflect.KClass
 
 class WidgetUpdateServiceTest {
@@ -22,19 +20,6 @@ class WidgetUpdateServiceTest {
     fun testFindingRemoteViewsUpdater() {
         findAnnotation(AppWidgetUpdateTest::class.java, RemoteViewsUpdater::class)
         assertTrue(true)
-    }
-
-    @Test
-    fun testFindingUpdateWidget() {
-        findAnnotation(AppWidgetUpdateTest::class.java, UpdateWidget::class)
-        assertTrue(true)
-    }
-
-    @Test
-    fun testGettingValueUpdateWidget() {
-        val annotation = findAnnotation(AppWidgetUpdateTest::class.java, UpdateWidget::class) as UpdateWidget
-        assertTrue(annotation.timeValue == 1L)
-        assertTrue(annotation.timeUnit == TimeUnit.DAYS)
     }
 
     @Test

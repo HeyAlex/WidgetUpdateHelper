@@ -1,6 +1,5 @@
 package heyalex.widgethelper;
 
-import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -82,56 +81,6 @@ public class WidgetUpdateService extends IntentService {
             context.startService(getIntentUpdateWidget(context, provider.getClass(), dataBundle,
                     widgetIds));
         }
-    }
-
-    public static void scheduleWidget(Context context,
-                                      AppWidgetProvider provider,
-                                      Bundle dataBundle,
-                                      int... widgetIds) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(getIntentUpdateWidget(context, provider.getClass(), dataBundle, widgetIds));
-        } else {
-            context.startService(getIntentUpdateWidget(context, provider.getClass(), dataBundle, widgetIds));
-        }
-    }
-
-    private void setupAlarm(Context context, AppWidgetProvider provider, Bundle dataBundle) {
-        final AlarmManager alarmManager = (AlarmManager) context
-                .getSystemService(Context.ALARM_SERVICE);
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        int[] widgetIds = appWidgetManager.getAppWidgetIds(
-                new ComponentName(context, provider.getClass()));
-        Intent intent = getIntentUpdateWidget(context, provider.getClass(), dataBundle,
-                widgetIds);
-        PendingIntent pendingIntent = getPendingIntent(context, intent);
-
-        alarmManager.cancel(pendingIntent);
-
-        UpdateWidget annotation = (UpdateWidget) findAnnotation(provider.getClass(), UpdateWidget.class);
-        long millis = annotation.timeUnit().toMillis(annotation.timeValue());
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, millis,
-                    pendingIntent);
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, millis,
-                        pendingIntent);
-            } else {
-                alarmManager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
-            }
-        }
-    }
-
-    public void stopAlarm(Context context, AppWidgetProvider provider) {
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        int[] widgetIds = appWidgetManager.getAppWidgetIds(
-                new ComponentName(context, provider.getClass()));
-        Intent intent = getIntentUpdateWidget(context, provider.getClass(), null,
-                widgetIds);
-        PendingIntent pendingIntent = getPendingIntent(context, intent);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(pendingIntent);
     }
 
     private static PendingIntent getPendingIntent(Context context, Intent intent) {
