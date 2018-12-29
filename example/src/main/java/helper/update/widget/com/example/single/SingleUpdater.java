@@ -21,6 +21,13 @@ public class SingleUpdater extends WidgetUpdater {
         //get text for our RemoteViews
         String text = dataBundle.getString("main_text", "");
 
+        try {
+            //DB or Internet requests
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //make RemoteViews depends on action and update widget
         for (int widgetId : ids) {
             if (action.startsWith(SingleRemoteViewBuilder.NEXT_ACTION)) {
