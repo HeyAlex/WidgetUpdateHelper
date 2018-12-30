@@ -8,12 +8,14 @@ Please, have a look at the **example** project.
 
 **WidgetBuilder**
 
-There is an interface `WidgetUpdater`, which has only one method `update(Context context, Bundle dataBundle, int... ids)`. 
+There is an abstract class `WidgetUpdater`, which has only two methods: abstract `update(Context context, Bundle dataBundle, int... ids)` and `makeNotification(Context context)` with default implementation.
+
 
 ```java
-public class SingleUpdater implements WidgetUpdater {
+public class SingleUpdater extends WidgetUpdater {
     @Override
     public void update(Context context, Bundle dataBundle, int... ids) {
+        //This callback will be running on background thread
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
        
         //make RemoteViews depends on dataBundle and update by widget ID
@@ -21,6 +23,17 @@ public class SingleUpdater implements WidgetUpdater {
         for (int widgetId : ids) {
             appWidgetManager.updateAppWidget(widgetId, remoteViews);
         }
+    }
+    
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public Notification makeNotification(@NonNull Context context) {
+        //This callback will be running on background thread
+        
+        //make custom notification if you need (WidgetUpdater already has default implementation)
+        
+        //this notification will be shown on Android Oreo devices and higher (don't forget about NotificationChannel)
+        return new Notification();
     }
 }
 ```
@@ -91,7 +104,7 @@ To use this library add following to your *module's* `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.github.HeyAlex:WidgetUpdateHelper:1.1'
+    implementation 'com.github.HeyAlex:WidgetUpdateHelper:1.3'
 }
 ```
 
