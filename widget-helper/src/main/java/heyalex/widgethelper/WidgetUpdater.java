@@ -60,6 +60,10 @@ public abstract class WidgetUpdater {
         }
 
         Notification.Builder notificationBuilder = new Notification.Builder(context, NOTIFICATION_CHANNEL_ID);
+        notificationBuilder.setOngoing(true);
+        notificationBuilder.setContentTitle("Update widget")
+                .setContentText("Wait for finish updating")
+                .setSmallIcon(android.R.drawable.stat_notify_sync);
         return notificationBuilder.build();
     }
 }
