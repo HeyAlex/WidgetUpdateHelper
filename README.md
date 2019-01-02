@@ -1,10 +1,11 @@
 # WidgetUpdateHelper
 
-This library helps managing the updating widgets. Just update all your widgets on background thread with `android.app.IntentService`, that provides that library.
+This library helps managing the updates of widgets. Just update all your widgets on background thread with `android.app.IntentService`, that provides that library.
+It's provide an easy and simple way to update app widgets.
 
-Please, have a look at the **example** project.
+[![CircleCI](https://circleci.com/gh/HeyAlex/WidgetUpdateHelper.svg?style=svg)](https://circleci.com/gh/HeyAlex/WidgetUpdateHelper)
 
-## Example
+## How to use WidgetUpdateHelper
 
 **WidgetBuilder**
 
@@ -17,6 +18,13 @@ public class SingleUpdater extends WidgetUpdater {
         //This callback will be running on background thread
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
        
+        try {
+            //DB or Internet requests
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         //make RemoteViews depends on dataBundle and update by widget ID
         RemoteViews remoteViews = new RemoteViews();
         for (int widgetId : ids) {
@@ -27,7 +35,7 @@ public class SingleUpdater extends WidgetUpdater {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Notification makeNotification(@NonNull Context context) {
-        //This callback will be running on background thread
+        //This callback will be also running on background thread
         
         //make custom notification if you need (WidgetUpdater already has default implementation)
         
@@ -47,7 +55,7 @@ When creating your own widget you can use `RemoteViewsUpdater` annotation to lin
 public class ExampleSingleAppWidget extends AppWidgetProvider {
         @Override
         public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-             // update widgets
+             // trigger you WidgetUpdater by this call
              WidgetUpdateService.updateWidgets(context, this, bundle, appWidgetIds);
         }
 
@@ -87,6 +95,8 @@ method public static void setTextViewPaintFlags(android.widget.RemoteViews, @IdR
 method public static void setTextViewTextSize(android.widget.RemoteViews, @IdRes int viewId, @DimenRes float size);
 ```
 
+Please, have a look at the **example** project, if you have problems with implementation 
+
 ## Integration
 The library is published to the jitpack repository, your *project's* `build.gradle` must contain:
 
@@ -108,7 +118,7 @@ dependencies {
 
 ### Why to use
 All updates are on background thread. So if you need to make RemoteViews depends on data from Database or Internet, that's what you need.
-Android O is also supported.
+Android P is also supported.
 
 ### License
 ```Text
