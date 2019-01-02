@@ -29,7 +29,7 @@ public class SampleViewFactory implements RemoteViewsService.RemoteViewsFactory 
 
     @Override
     public void onDataSetChanged() {
-
+        //TODO try to figure out how to use it with list on android P
     }
 
     @Override

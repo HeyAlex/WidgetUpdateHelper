@@ -10,7 +10,6 @@ Please, have a look at the **example** project.
 
 There is an abstract class `WidgetUpdater`, which has only two methods: abstract `update(Context context, Bundle dataBundle, int... ids)` and `makeNotification(Context context)` with default implementation.
 
-
 ```java
 public class SingleUpdater extends WidgetUpdater {
     @Override
@@ -99,7 +98,6 @@ allprojects {
 	}
 }
 ```
-
 To use this library add following to your *module's* `build.gradle`:
 
 ```groovy
