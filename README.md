@@ -3,6 +3,8 @@
 This library helps managing the updates of widgets. Just update all your widgets on background thread with `android.app.IntentService`, that provides that library.
 It's provide an easy and simple way to update app widgets.
 
+[![API](https://img.shields.io/badge/API-14%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=14)
+[![](https://jitpack.io/v/heyalex/widgetupdatehelper.svg)](https://jitpack.io/#heyalex/widgetupdatehelper) 
 [![CircleCI](https://circleci.com/gh/HeyAlex/WidgetUpdateHelper.svg?style=svg)](https://circleci.com/gh/HeyAlex/WidgetUpdateHelper)
 
 ## How to use WidgetUpdateHelper
