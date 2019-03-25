@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.common;
+package helper.update.widget.com.example.simple.common;
 
 import android.app.PendingIntent;
 import android.content.Context;

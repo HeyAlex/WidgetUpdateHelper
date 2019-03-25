@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.single;
+package helper.update.widget.com.example.simple.single;
 
 import android.app.Notification;
 import android.app.NotificationChannel;

@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.common;
+package helper.update.widget.com.example.simple.common;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import helper.update.widget.com.example.single.ExampleSingleAppWidget;
-import helper.update.widget.com.example.single.SingleRemoteViewBuilder;
+import helper.update.widget.com.example.simple.single.ExampleSingleAppWidget;
+import helper.update.widget.com.example.simple.single.SingleRemoteViewBuilder;
 import heyalex.widgethelper.RemoteViewsUpdater;
 import heyalex.widgethelper.WidgetUpdateService;
 

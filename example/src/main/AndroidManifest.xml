@@ -10,7 +10,7 @@
         android:theme="@style/AppTheme">
 
         <receiver
-            android:name=".single.ExampleSingleAppWidget"
+            android:name=".simple.single.ExampleSingleAppWidget"
             android:label="Single Example">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -25,7 +25,7 @@
         <service android:name=".list.SampleRemoteService" />
 
         <receiver
-            android:name=".common.ExampleCommonAppWidget"
+            android:name=".simple.common.ExampleCommonAppWidget"
             android:label="Common Example">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

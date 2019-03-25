@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.common;
+package helper.update.widget.com.example.simple.common;
 
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
 
-import helper.update.widget.com.example.single.SingleRemoteViewBuilder;
+import helper.update.widget.com.example.simple.single.SingleRemoteViewBuilder;
 import heyalex.widgethelper.WidgetUpdater;
 
 public class CommonUpdater extends WidgetUpdater {
