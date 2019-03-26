@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.list;
+package helper.update.widget.com.example.simple.list;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;

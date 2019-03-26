@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.list;
+package helper.update.widget.com.example.simple.list;
 
 public class SampleData {
     private String name;

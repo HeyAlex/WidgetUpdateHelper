@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.list;
+package helper.update.widget.com.example.simple.list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,7 +29,7 @@ public class SampleViewFactory implements RemoteViewsService.RemoteViewsFactory 
 
     @Override
     public void onDataSetChanged() {
-        //TODO try to figure out how to use it with list on android P
+
     }
 
     @Override

@@ -21,8 +21,8 @@
                 android:resource="@xml/example_app_widget_single_info" />
         </receiver>
 
-        <service android:name="heyalex.widgethelper.WidgetUpdateService" />
-        <service android:name=".list.SampleRemoteService" />
+        <service android:name=".simple.list.SampleRemoteService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <receiver
             android:name=".simple.common.ExampleCommonAppWidget"
@@ -37,7 +37,7 @@
         </receiver>
 
         <receiver
-            android:name=".list.ListAppWidget"
+            android:name=".simple.list.ListAppWidget"
             android:label="List Example">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

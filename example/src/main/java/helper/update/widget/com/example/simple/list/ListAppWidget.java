@@ -1,4 +1,4 @@
-package helper.update.widget.com.example.list;
+package helper.update.widget.com.example.simple.list;
 
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
