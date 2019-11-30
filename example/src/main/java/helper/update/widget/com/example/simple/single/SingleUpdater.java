@@ -23,7 +23,7 @@ public class SingleUpdater extends WidgetUpdater {
 
         try {
             //DB or Internet requests
-            Thread.sleep(10000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
