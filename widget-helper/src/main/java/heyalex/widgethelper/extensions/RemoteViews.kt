@@ -3,11 +3,11 @@
 // Aliases to other public API.
 package heyalex.widgethelper.extensions
 
-import android.support.annotation.ColorInt
-import android.support.annotation.DimenRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.IdRes
-import android.support.annotation.IntRange
+import androidx.annotation.ColorInt
+import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.IntRange
 import android.widget.RemoteViews
 
 /** Set `textSize` to 'TextView' in 'RemoteView'. */

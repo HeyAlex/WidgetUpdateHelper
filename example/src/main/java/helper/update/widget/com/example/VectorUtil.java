@@ -5,8 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.DrawableRes;
-import android.support.v7.widget.AppCompatDrawableManager;
+import androidx.annotation.DrawableRes;
+import androidx.appcompat.widget.AppCompatDrawableManager;
 
 /**
  * Vector Utils for pre Lolipop devices

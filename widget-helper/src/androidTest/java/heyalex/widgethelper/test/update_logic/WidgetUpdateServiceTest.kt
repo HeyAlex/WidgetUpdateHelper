@@ -1,7 +1,7 @@
 package heyalex.widgethelper.test.update_logic
 
 import android.content.ComponentName
-import android.support.test.rule.ActivityTestRule
+import androidx.test.rule.ActivityTestRule
 import heyalex.widgethelper.RemoteViewsUpdater
 import heyalex.widgethelper.test.TestActivity
 import junit.framework.Assert.assertTrue
