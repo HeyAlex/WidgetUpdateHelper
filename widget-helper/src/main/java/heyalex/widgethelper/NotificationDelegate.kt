@@ -1,6 +1,5 @@
 package heyalex.widgethelper
 
-import android.R
 import android.annotation.TargetApi
 import android.app.Notification
 import android.app.NotificationChannel

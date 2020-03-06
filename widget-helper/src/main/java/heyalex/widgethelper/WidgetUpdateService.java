@@ -14,6 +14,8 @@ import java.lang.annotation.Annotation;
 import java.lang.annotation.AnnotationFormatError;
 import java.util.Arrays;
 
+import androidx.annotation.Nullable;
+
 /**
  * Update Service that helps update widget by ComponentName and Ids
  */
@@ -38,10 +40,15 @@ public class WidgetUpdateService extends IntentService {
 
     public WidgetUpdateService() {
         super("WidgetUpdateService");
+        setIntentRedelivery(true);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             startForeground(NOTIFICATION_ID, NotificationDelegate.getNotification(this));
         }
-        setIntentRedelivery(true);
     }
 
     /**
