@@ -38,6 +38,9 @@ public class WidgetUpdateService extends IntentService {
 
     public WidgetUpdateService() {
         super("WidgetUpdateService");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForeground(NOTIFICATION_ID, NotificationDelegate.getNotification(this));
+        }
         setIntentRedelivery(true);
     }
 

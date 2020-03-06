@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.widget.RemoteViews;
 
+import org.jetbrains.annotations.NotNull;
+
 
 /**
  * Interface for updating widget
@@ -22,12 +24,12 @@ public abstract class WidgetUpdater {
     /**
      * Channel Id of default {@link Notification}
      */
-    private static final String NOTIFICATION_CHANNEL_ID = "widget updates";
+    static final String NOTIFICATION_CHANNEL_ID = "widget updates";
 
     /**
      * Channel Name of default {@link Notification}
      */
-    private static final String channelName = "Update Widget";
+    static final String channelName = "Update Widget";
 
     /**
      * Update widget by passing {@link RemoteViews} and id into
@@ -53,17 +55,6 @@ public abstract class WidgetUpdater {
      */
     @TargetApi(Build.VERSION_CODES.O)
     public Notification makeNotification(@NonNull Context context) {
-        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (manager != null) {
-            manager.createNotificationChannel(chan);
-        }
-
-        Notification.Builder notificationBuilder = new Notification.Builder(context, NOTIFICATION_CHANNEL_ID);
-        notificationBuilder.setOngoing(true);
-        notificationBuilder.setContentTitle("Update widget")
-                .setContentText("Wait for finish updating")
-                .setSmallIcon(android.R.drawable.stat_notify_sync);
-        return notificationBuilder.build();
+        return NotificationDelegate.getNotification(context);
     }
 }
