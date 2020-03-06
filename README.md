@@ -114,7 +114,7 @@ To use this library add following to your *module's* `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'com.github.HeyAlex:WidgetUpdateHelper:1.3'
+    implementation 'com.github.HeyAlex:WidgetUpdateHelper:1.4'
 }
 ```
 
