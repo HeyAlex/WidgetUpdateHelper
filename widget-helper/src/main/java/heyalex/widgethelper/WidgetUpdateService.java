@@ -157,13 +157,8 @@ public class WidgetUpdateService extends IntentService {
             clazz = Class.forName(provider.getClassName());
             Annotation annotation = findAnnotation(clazz, RemoteViewsUpdater.class);
             WidgetUpdater builder = ((RemoteViewsUpdater) annotation).value().newInstance();
-            if (builder != null) {
-                invokeNotification(builder);
-                builder.update(this, dataBundle, ids);
-            } else {
-                LogWrapper.w(LOG_TAG, "cannot update widgets, no builder set for given " +
-                        "EXTRA_PROVIDER");
-            }
+            invokeNotification(builder);
+            builder.update(this, dataBundle, ids);
 
         } catch (ClassNotFoundException e) {
             throw new InstantiationException("Unable to instantiate WidgetBuilder " +
