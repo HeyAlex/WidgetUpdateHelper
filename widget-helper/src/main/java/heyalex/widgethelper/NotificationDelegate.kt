@@ -12,14 +12,14 @@ class NotificationDelegate {
         @JvmStatic
         @TargetApi(Build.VERSION_CODES.O)
         fun getNotification(context: Context): Notification {
-            val chan = NotificationChannel(
+            val channel = NotificationChannel(
                 WidgetUpdater.NOTIFICATION_CHANNEL_ID,
                 WidgetUpdater.channelName,
                 NotificationManager.IMPORTANCE_NONE
             )
             val manager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            manager.createNotificationChannel(chan)
+            manager.createNotificationChannel(channel)
             val notificationBuilder =
                 Notification.Builder(context, WidgetUpdater.NOTIFICATION_CHANNEL_ID)
             notificationBuilder.setOngoing(true)
