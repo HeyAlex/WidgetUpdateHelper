@@ -4,7 +4,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.heyalex'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 14
