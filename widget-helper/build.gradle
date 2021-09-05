@@ -21,6 +21,6 @@ dependencies {
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation "androidx.test:runner:${versions.atsl}"
     androidTestImplementation "androidx.test:rules:${versions.atsl}"
-    androidTestImplementation 'androidx.core:core-ktx:1.1.0'
+    androidTestImplementation 'androidx.core:core-ktx:1.6.0'
     implementation "org.jetbrains.kotlin:kotlin-reflect:${versions.kotlin}"
 }

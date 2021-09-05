@@ -10,6 +10,7 @@
         android:theme="@style/AppTheme">
 
         <receiver
+            android:exported="false"
             android:name=".simple.single.ExampleSingleAppWidget"
             android:label="Single Example">
             <intent-filter>
@@ -25,6 +26,7 @@
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <receiver
+            android:exported="false"
             android:name=".simple.common.ExampleCommonAppWidget"
             android:label="Common Example">
             <intent-filter>
@@ -37,6 +39,7 @@
         </receiver>
 
         <receiver
+            android:exported="false"
             android:name=".simple.list.ListAppWidget"
             android:label="List Example">
             <intent-filter>
