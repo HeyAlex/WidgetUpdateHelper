@@ -72,7 +72,7 @@ public class SingleRemoteViewBuilder {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return PendingIntent.getForegroundService(context, widgetId, updateServiceIntent,
-                    PendingIntent.FLAG_CANCEL_CURRENT);
+                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_CANCEL_CURRENT);
         } else {
             return PendingIntent.getService(context, widgetId, updateServiceIntent,
                     PendingIntent.FLAG_CANCEL_CURRENT);

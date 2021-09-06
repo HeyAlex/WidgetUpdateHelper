@@ -75,7 +75,7 @@ public class CommonRemoteViewBuilder {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return PendingIntent.getForegroundService(context, 0, updateServiceIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         } else {
             return PendingIntent.getService(context, 0, updateServiceIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
