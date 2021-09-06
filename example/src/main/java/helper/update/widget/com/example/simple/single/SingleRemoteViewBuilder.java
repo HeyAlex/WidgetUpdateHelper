@@ -14,9 +14,9 @@ import heyalex.widgethelper.WidgetUpdateService;
 
 public class SingleRemoteViewBuilder {
 
-    private RemoteViews remoteViews;
-    private Context context;
-    private int widgetId;
+    private final RemoteViews remoteViews;
+    private final Context context;
+    private final int widgetId;
     public static final String NEXT_TEXT = "EXAMPLE NEXT TEXT";
     public static final String PREVIOUS_TEXT = "EXAMPLE PREVIOUS TEXT";
     public static final String NEXT_ACTION = "NEXT_ACTION";

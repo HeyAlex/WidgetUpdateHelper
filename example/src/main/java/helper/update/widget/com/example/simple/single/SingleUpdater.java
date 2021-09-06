@@ -48,10 +48,10 @@ public class SingleUpdater extends WidgetUpdater {
     public Notification makeNotification(@NonNull Context context) {
         String NOTIFICATION_CHANNEL_ID = "Test CHANNEL";
         String channelName = "SINGLE WIDGET UPDATING";
-        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+        NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
         NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager != null) {
-            manager.createNotificationChannel(chan);
+            manager.createNotificationChannel(channel);
         }
 
         Notification.Builder notificationBuilder = new Notification.Builder(context, NOTIFICATION_CHANNEL_ID);

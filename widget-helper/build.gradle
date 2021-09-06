@@ -15,10 +15,10 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
-    implementation "androidx.annotation:annotation:${versions.supportLibrary}"
+    implementation "androidx.annotation:annotation:${versions.androidx}"
 
-    androidTestImplementation "androidx.annotation:annotation:${versions.supportLibrary}"
-    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation "androidx.annotation:annotation:${versions.androidx}"
+    androidTestImplementation 'junit:junit:4.13.2'
     androidTestImplementation "androidx.test:runner:${versions.atsl}"
     androidTestImplementation "androidx.test:rules:${versions.atsl}"
     androidTestImplementation 'androidx.core:core-ktx:1.6.0'
