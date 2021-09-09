@@ -96,7 +96,7 @@ public class WidgetUpdateService extends IntentService {
     private static PendingIntent getPendingIntent(Context context, Intent intent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             return PendingIntent.getForegroundService(context, 0, intent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         } else {
             return PendingIntent.getService(context, 0, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
